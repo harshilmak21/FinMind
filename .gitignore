@@ -1,0 +1,23 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Gmail credentials and tokens
+credentials.json
+token.json
+client_secret*.json
+
+# Environment variables
+.env
+
+# Database
+*.db
+
+# Imported financial data
+data/imports/
+
+# IDE
+.vscode/
