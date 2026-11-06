@@ -1,0 +1,30 @@
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: finmind-postgres
+
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:5432:5432"
+
+    env_file:
+      - .env
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    volumes:
+      - finmind_postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  finmind_postgres_data:
